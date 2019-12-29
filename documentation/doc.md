@@ -114,6 +114,59 @@ f.close()
 ```
 ## Control flow structures
 
+### Boolean values and expressions
+
+Valores *falsy*: False, 0, None, [], "".
+Valores *truthy*: True, resto de valores.
+
+Operadores de comparación: <, <=, ==, >, >=, !=, is, is not, in, not in.
+Operadores lógicos: and, not, or.
+
+### if-else
+
+```python
+x = 5
+if x < 5:
+  y = -1
+  z = 5
+elif x > 5:
+  y = 1
+  z = 11
+else:
+  y = 0
+  z = 10
+print(x, y, z)
+```
+
+### while
+
+```python
+u, v, x, y = 0, 0, 100, 30
+while x > y:
+  u = u + y
+  x = x - y
+  if x < y + 2
+    v = v + x
+    x = 0
+  else:
+    v = v + y + 2
+    x = x - y - 2
+print(u, v)
+```
+
+El bucle puede contener un `break` (que termina el loop) o un `continue` (que aborta la ejecución de la iteración actual del loop).
+
+### for
+
+Mediante un bucle for se puede iterar por cualquier tipo iterable, como una lista o una tupla. Se iterará por cada uno de los elementos en la secuencia, como un foreach.
+
+```python
+...
+for x in item_list:
+...
+```
+
+### Function definition
 
 
 # 4. The absolute basics
