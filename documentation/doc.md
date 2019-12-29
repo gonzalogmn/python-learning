@@ -168,6 +168,49 @@ for x in item_list:
 
 ### Function definition
 
+```python
+def funct1(x, y, z):
+  value = x + 2*y + z ** 2
+  return value
+
+um v = 3, 4
+funct1(u, z=v, y=2) # Llamada con parámetros en diferente orden
+
+# Función con parámetros por defecto
+def funct2(x, y=1, z=1):
+  return x + 2 * y + z ** 2
+
+funct2(3, z=4)
+
+# Función con parámetro especial que recolecta todos los argumentos extra en una tupla
+def funct3(x, y=1, z=1, *tup):
+  print((x,y,z) + tup)
+
+funct3(1, 2, 3, 4, 5, 6, 7, 8, 9) # Me devuelve (1, 2, 3, 4, 5, 6, 7, 8, 9)
+
+# Función con parámetro especial que recolecta los parámetros extra en un diccionario
+def funct4(x, y=1, z=1, **kwargs):
+  print(x, y, z, kwargs)
+
+funct4(1, 2, m=5, n=9, z=3) # Me devuelve 1 2 3 {'n': 9, 'm': 5}
+```
+
+### Exceptions
+Las excepciones se pueden capturar mediante la sentencia `try-except-else-finally`. Cualquier excepción que no sea capturada, supondrá el fin de la ejecución del programa.
+
+```python
+filenames = ["myfile1", "nonExistent"]
+for file in filenames:
+  try:
+    f = open(file, 'r')
+    line = f.readline()
+    if line == "":
+      f.close()
+      raise EmptyFileError("%s: is empty" % file)
+  except IOError as error:
+    print("%s")
+
+```
 
 # 4. The absolute basics
 
