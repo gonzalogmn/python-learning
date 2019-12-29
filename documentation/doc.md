@@ -208,9 +208,37 @@ for file in filenames:
       f.close()
       raise EmptyFileError("%s: is empty" % file)
   except IOError as error:
-    print("%s")
-
+    print("%s: could not be opened: %s" % (file, error.strerror))
+  except EmptyFileError as error:
+    print (error)
+  else:
+    print("%s: %s" % (file, f.readline()))
+  finally:
+    print("Done processing", file)
 ```
+El `else` es opcional, solo se ejecuta si no se da ninguna excepción.
+
+### Context handling using the with keyword
+
+Otra forma de encapsular a estructura `try-except-finally` es mediante el uso de `with` y un context manager.
+
+Python define los context managers para cosas como el acceso a ficheros.
+
+Se pueden definir context managers propios, creados manualmente.
+
+Una ventaja de los context managers es que tienen definidas acciones de *cleanup*, que se ejecutan siempre, se lance excepción o no.
+
+```python
+filename = "myfile.txt"
+with open(filename, "r") as f:
+  for line in f:
+    print(f)
+```
+`with` establece un context manager que envuelve la función `open` y el siguiente bloque. En este caso, la acción de *cleanup* predefinida es cerrar el fichero, aunque ocurra una excepción.
+
+## Module creation (COMPLETAR)
+
+## Object-oriented programming (COMPLETAR)
 
 # 4. The absolute basics
 
