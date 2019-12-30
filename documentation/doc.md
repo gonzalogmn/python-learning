@@ -303,3 +303,19 @@ name = input("Name? :")
 # 5. Lists, tuples and sets
 
 ## Lists are like arrays
+Una lista de Python es como un array en Java o C: es una colección ordenada de objetos. La lista se define mediante corchetes:
+
+```python
+x = [1, 2, 3]
+```
+Al contrario que en otros lenguajes, las listas en Python pueden contener diferentes tipos de elementos. Un elemento de una lista puede ser cualquier objeto de Python.
+
+```python
+x = [2, "two", [1, 2, 3]]
+```
+
+## List indices
+En Python, el primer índice es el 0.
+Si un índice es negativo, indica una posición contando desde el final de la lista, siendo el -1 la última posición de la lista, el -2 la penúltima, y así sucesivamente.
+
+- `list[index1:index2]`: extrae todos los elementos incluyendo el index1 hasta el index2 (sin incluir), y los devuelve como una nueva lista.
