@@ -242,4 +242,64 @@ with open(filename, "r") as f:
 
 # 4. The absolute basics
 
+## Variables and assignments
+
+En Python no hay que tipar las variables. Las variables (en Python) no son buckets o almacenes. Son más bien un tag o label que se refiere a un objeto del espacio de nombres del intérprete de Python. Varias labels (o variables) pueden apuntar al mismo objeto, y cuando cambia el objeto, el valor al que apuntan todas esas variables también cambia.
+
+Por ejemplo:
+
+```python
+a = [1, 2, 3]
+b = a
+c = b
+b[1] = 5
+print(a, b, c) # Me muestra [1, 5, 3] [1, 5, 3] [1, 5, 3]
+```
+
+Si las variables apuntan a constantes o valores inmutables, esta distinción no está tan clara:
+
+```python
+a = 1
+b = a
+c = b
+b = 5
+print(a, b, c) # Muestra 1 5 1
+```
+Esto ocurre porque los objetos a los que apuntan no pueden cambiar (son inmutables). En el punto en el que b = 5, b pasa a apuntar a 5, pero las otras dos variables no.
+
+- `del`: elimina la variable.
+```python
+x = 5
+del x
+```
+
+## Strings
+
+Los *backslashes* se pueden usar para escapar caracteres. `\n` significa el carácter de nueva línea, `\t` es un tab, etc.
+
+Si un string lo delimitamos con triple comilla (simple o doble), nos permite escribir el string en varias líneas.
+
+## Numbers
+
+Python ofrece cuatro tipos de números: integers, floats, complex numbers y Booleans. Un integer solo está restringido por los recursos de la máquina
+
+### Built-in numeric functions
+Python provee en su core de las siguientes funciones para operar con números: `abs`, `divmod`, `float`, `hex`, `int`, `max`, `min`, `oct`, `pow`, `round`.
+
+Para operaciones más avanzadas está disponible el módulo `math`.
+
+El core de Python no está pensado para operaciones numéricas intensivas por las limitaciones de velocidad. Pero mediante la extensión `NumPy` podemos hacer uso de numerosas implementaciones de operaciones avanzadas, como operaciones con arrays, matrices multidimensionales o transformadas de Fourier.
+
+## The None value
+`None` se utiliza para representar el valor vacío. Se suele utilizar como *placeholder* para indicar un punto en una estructura de datos donde en determinado momento existirán datos.
+
+## Getting input from the user
+Se usa `input()`.
+
+```python
+name = input("Name? :")
+```
+
 # 5. Lists, tuples and sets
+
+## Lists are like arrays
