@@ -319,3 +319,15 @@ En Python, el primer índice es el 0.
 Si un índice es negativo, indica una posición contando desde el final de la lista, siendo el -1 la última posición de la lista, el -2 la penúltima, y así sucesivamente.
 
 - `list[index1:index2]`: extrae todos los elementos incluyendo el index1 hasta el index2 (sin incluir), y los devuelve como una nueva lista.
+
+```python
+x = ["first", "second", "third", "fourth"]
+x[1:-1] # Me devuelve ["second", "third"]
+x[-2:-1] # Me devuelve ["third"]
+x[-1:2] # Ojo, me devuelve una lista vacía []
+x[:] # Me devuelve UNA COPIA de la lista ["first", "second", "third", "fourth"]
+```
+El último ejemplo se utiliza para obtener una copia de una lista.
+
+## Modifying lists
+
