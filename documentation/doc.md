@@ -331,3 +331,71 @@ El último ejemplo se utiliza para obtener una copia de una lista.
 
 ## Modifying lists
 
+```python
+x = [1, 2, 3, 4]
+x[1] = "two"
+x # [1, 'two', 3, 4]
+```
+También se puede usar la siguiente notación:
+
+```python
+lista[index1:index2] = listb
+```
+Esto causa el reemplazo de ese rango por el contenido de `listb`, la cual puede tener más o menos elementos que los que se han eliminado.
+
+Con esto se puede hacer cosas como por ejemplo:
+
+```python
+x = [1, 2, 3, 4]
+x[len(x):] = [5, 6, 7]
+x # [1, 2, 3, 4, 5, 6, 7]
+```
+Para añadir un solo elemento en la lista, se puede usar el operador `append`. Si intentamos hacer un `append` de una lista, esta se añade como un único elemento más. Paraañadir los elementos de una lista a otra, hay que usar el método `extend`.
+
+Otro método es `insert`, que sirve para insertar nuevos elementos entre los elementos de una lista, o al inicio, o al final.
+
+```python
+x = [1, 2, 3]
+x.insert(2, "hello")
+x # [1, 2, 'hello', 3]
+
+x.insert(0, "start")
+x # ['start', 1, 2, 'hello', 3]
+```
+
+Para eliminar elementos de una lista tenemos el operador `del`.
+
+```python
+x = ['a', 2, 'c', 7, 9, 11]
+del x[1]
+x # ['a', 'c', 7, 9, 11]
+```
+El método `remove` no es el inverso de `insert`. `remove` busca la primera ocurrencia de un valor en la lista y lo elimina de la lista.
+
+```python
+x = [1, 2, 3, 4, 3, 5]
+x.remove(3)
+x # [1, 2, 4, 3, 5]
+```
+Si `remove` no puede encontrar el valor, lanza un error.
+
+## Sorting lists
+
+Las listas se pueden ordenar usando el método `sort`.
+
+Pero ojo, el método `sort` modifica la lista original. Para ordenar una lista sin modificar la lista original, se puede:
+* Usar la función `sorted()`.
+* Hacer una copia de la lista y ordenar la copia.
+
+```python
+x = [2, 4, 1, 3]
+y = x[:]
+y.sort()
+```
+Si se intenta aplicar un `sort` a una lista con números y strings, lanzará una excepción.
+
+(55)
+
+
+
+
