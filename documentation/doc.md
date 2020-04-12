@@ -394,8 +394,276 @@ y.sort()
 ```
 Si se intenta aplicar un `sort` a una lista con números y strings, lanzará una excepción.
 
-(55)
+### Custom sorting
 
+Para ello, hay que escribir una función que devuelva un valor o clave sobre la que ordenar.
+
+Por ejemplo:
+
+```python
+def compare_num_of_chars(string1):
+  return len(string1)
+
+...
+
+words_list.sort(key=compare_num_of_chars)
+```
+
+### The sorted() function
+
+Las listas tienen el método `sort` pero otros iterables en Python, como las claves de un diccionario, no lo tienen. Python tiene también la función `sorted()`, que devuelve una lista ordenada a partir de un iterable:
+
+```python
+x = (4, 3, 1, 2)
+y = sorted(x) # [1, 2, 3, 4]
+```
+
+## Other common list operations
+
+### List membership with the in operator
+
+```python
+3 in [1, 3, 4, 4]  # True
+3 not in [1, 3, 4, 5] # False
+```
+
+### List concatenation with the + operator
+
+Para crear una lista concatenando dos listas existentes:
+
+```python
+z = [1, 2, 3] + [4, 5]
+```
+
+### List initialization with the * operator
+
+El operador * sirve para producir una lista de un determinado tamaño, que se inicializa a un determinado valor dado. Este operador se utiliza bastante para trabajar con listas grandes, cuyo tamaño se conoce previamente.
+
+Aunque se puede usar el método `append`, se tiene mayor eficiencia con *.
+
+```python
+z = [None] * 4 # [None, None, None, None]
+```
+
+### List minimum or maximum with min and max
+
+Se puede usar `min` y `max` para buscar el menor y mayor elemento de la lista.
+
+```python
+min([3, 7 ,0 ,-2, 11]) # -2
+```
+
+### List search with index
+
+Si queremos saber dónde se encuentra un elemento en una lista, usamos `index`.
+
+```python
+x = [1, 3, "five", 7, -2]
+x.index(7) # 3
+```
+
+Si se intenta buscar un elemento que no está en la lista dará error.
+
+### List matches with count
+
+`count` también busca un valor en una lista, pero devuele el número de veces que el valor aparece en la lista.
+
+```python
+x = [1, 2, 2, 3, 5, 2, 5]
+x.count(2) # 3
+```
+
+## Nested lists and deep copies
+
+Las listas se pueden anidar:
+
+```python
+m = [[0, 1, 2], [10, 11, 12]]
+```
+Las listas anidadas pueden dar problemas. Por ejemplo:
+
+```python
+nested = [0]
+original = [nested, 1]
+```
+
+Con esta situación, el valor de la lista anidada puede cambiarse desde ambos puntos:
+
+```python
+nested[0] = 'zero'
+original # [['zero'], 1]
+original[0][0] = 0
+nested # [0]
+```
+
+Pero si damos a `nested` como valor otra lista, la conexión se rompe:
+
+```python
+nested = [2]
+original = [[0], 1]
+```
+
+Hemos visto que se puede obtener una copia de una lista haciendo `x[:]`. También usando el operador + ( x + []) o * (x * 1).
+Todas estas crean una *shallow copy* de la lista, que es lo uqe necesitaremos la mayoría de las veces.
+
+Pero si la lista tiene otras listas anidadas, lo que necesitamos es una *deep copy*.
+
+Esto lo podemos hacer con la función `deep-copy` del módulo `copy`.
+
+```python
+original = [[0], 1]
+shallow = original[:]
+
+import copy
+deep = copy.deepcopy(original)
+```
+
+Las diferencias entre las copias *shallow* y *deep* son que las listas a las que apuntan el objeto original y *shallow* son la misma. Si cambiamos el valor en la lista anidada en alguno de ellos, en la otra cambia también.
+
+```python
+shallow[1] = 2
+shallow # [[0], 2]
+original # [[0], 1]
+
+shallow[0][0] = 'zero'
+original # [['zero'], 1]
+```
+
+Sin embargo, la copia *deep* es independiente de la original:
+
+```python
+deep[0][0] = 5
+original # [['zero'], 1]
+```
+
+## Tuples
+
+Las tuplas son estructuras parecidas a las listas, pero no se pueden modificar, solo se pueden crear. La razón de la existencia de las tuplas es que cumplen roles donde las listas no son tan eficientes, como claves de diccionarios.
+
+Para crear una tupla:
+
+```python
+x = ('a', 'b', 'c')
+```
+
+La principal diferencia entre listas y tuplas es que las tuplas son inmutables.
+
+Eso sí, se pueden crear tuplas a partir de tuplas existentes usando los operadores + y *:
+
+```python
+x + x
+2 * x
+```
+
+Y la copia de una tupla se puede realizar de la misma forma que una lista:
+
+```python
+x[:]
+x * 1
+x + ()
+```
+
+### One-element tuples need a comma
+
+```python
+x = 3
+y = 4
+(x + y) # 7
+(x + y,) # Tupla (7,)
+```
+
+### Packing and unpacking tuples
+
+Python permite poner tuplas en la parte izquierda de una asignación:
+
+```python
+(one, two, three) = (1, 2, 3)
+one # 1
+```
+
+También se pueden escribir sin paréntesis:
+
+```python
+one, two, three = 1, 2, 3
+```
+
+En Python 3, se permite que un elemento marcado con * reciba todos los elementos que no casen en una asignación:
+
+```python
+x = (1, 2, 3, 4)
+a, b, c* = x
+c # [3, 4]
+a, b*, c = x
+b # [2, 3]
+```
+
+### Converting between lists and tuples
+
+Las tuplas se pueden convertir en listas con la función `list`. Y al revés con `tuple`.
+
+```python
+list((1, 2, 3, 4)) # [1, 2, 3, 4]
+tuple([1, 2, 3, 4]) # (1, 2, 3, 4)
+```
+
+Nota, `list` se utiliza también para partir una string en sus caracteres:
+
+```python
+list("Hello") # ['H', 'e', 'l', 'l', 'o']
+```
+
+## Sets
+
+Un set en Python es una colección de objetos que se usa cuando lo que importar es la pertenencia y la unicidad del objeto en la colección. 
+
+Los elementos de un set deben ser inmutables y hasheables. Esto quiere decir que ints, floats, strings y tuplas pueden ser miembros de un set, pero listas, diccionarios y sets no.
+
+### Set operations
+
+Crear un set:
+
+```python
+x = set([1, 2, 3, 1, 3, 5]) # {1, 2, 3, 5}
+```
+
+```python
+x.add(6)
+x.remove(5)
+1 in x
+```
+
+Unión de sets:
+
+```python
+y = set({1, 7, 8, 9})
+x | y # {1, 2, 3, 6, 7, 8, 9}
+```
+
+Intersección:
+
+```python
+x & y # {1}
+```
+
+Elementos que estén en un set o en el otro, pero no en ambos:
+
+```python
+x ^ y # {2, 3, 6, 7, 8, 9}
+```
+
+### Frozensets
+
+Como los sets no son inmutables ni hasheables, no pueden pertenecer a otros sets. Para remediar esto, Python tiene el `frozenset`, que es un set que no puede ser modificado una vez creado. Estos sí pueden ser miembros de otros sets:
+
+```python
+x = set({1, 7, 8, 9})
+z = frozenset(x)
+x.add(z)
+```
+
+# 6. Strings
+
+(68)
 
 
 
